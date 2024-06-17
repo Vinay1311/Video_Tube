@@ -1,0 +1,32 @@
+# Ignore development environment files
+.env.dev
+.env
+db.sqlite3
+
+# Ignore common file types
+*.xml
+*.zip
+
+# Ignore IDE and system-generated files
+.idea/
+.idea/* 
+__pycache__/
+__pycache__/*
+
+# Ignore media files sent by users
+media/user/*
+media/*
+static_cdn/
+static_cdn/*
+
+# Ignore Visual Studio Code settings
+.vscode/
+
+# Ignore Python virtual environment
+venv/
+
+# Ignore custom scripts or files
+*custom_scripts
+scripts/custom.py
+scripts/populate_locations.py
+scripts/theme/*
