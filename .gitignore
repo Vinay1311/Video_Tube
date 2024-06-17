@@ -31,3 +31,4 @@ venv1/*
 scripts/custom.py
 scripts/populate_locations.py
 scripts/theme/*
+
