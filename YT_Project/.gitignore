@@ -2,6 +2,7 @@
 .env.dev
 .env
 db.sqlite3
+venv1
 
 # Ignore common file types
 *.xml
@@ -23,7 +24,7 @@ static_cdn/*
 .vscode/
 
 # Ignore Python virtual environment
-venv/
+venv1/*
 
 # Ignore custom scripts or files
 *custom_scripts
