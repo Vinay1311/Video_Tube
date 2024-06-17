@@ -2,7 +2,7 @@
 .env.dev
 .env
 db.sqlite3
-venv1
+../venv1
 
 # Ignore common file types
 *.xml
