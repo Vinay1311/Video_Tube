@@ -2,6 +2,7 @@
 .env.dev
 .env
 db.sqlite3
+../venv1
 
 # Ignore common file types
 *.xml
@@ -15,7 +16,7 @@ __pycache__/*
 
 # Ignore media files sent by users
 media/user/*
-media/*
+media/*YT_Project/.gitignore
 static_cdn/
 static_cdn/*
 
@@ -23,10 +24,11 @@ static_cdn/*
 .vscode/
 
 # Ignore Python virtual environment
-venv/
+venv1/*
 
 # Ignore custom scripts or files
 *custom_scripts
 scripts/custom.py
 scripts/populate_locations.py
 scripts/theme/*
+
