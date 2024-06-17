@@ -16,7 +16,7 @@ __pycache__/*
 
 # Ignore media files sent by users
 media/user/*
-media/*
+media/*YT_Project/.gitignore
 static_cdn/
 static_cdn/*
 
