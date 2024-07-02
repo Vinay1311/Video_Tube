@@ -22,6 +22,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("master/", include('master.urls')),#URL Path for master app
+    # path("base_user/", include('base_user.urls')),#URL Path for base_users app
+    path("app_users/", include('app_users.urls')),#URL Path for app_users app
 ]
 
 # Media files settings

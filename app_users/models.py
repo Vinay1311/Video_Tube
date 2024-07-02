@@ -18,7 +18,7 @@ class UserDetails(CreationModeificationBase):
     email = models.EmailField(validators=[regex_validator.email_regex])
     avatar_image = models.ImageField(null=True, blank= True, upload_to='media/files/user_avatar_images/')
     cover_image = models.ImageField(null=True, blank= True, upload_to='media/files/user_cover_images/')
-    password = models.CharField(max_length=30)
+    password = models.CharField(max_length=200)
     # videos_history = models.ForeignKey()
 
     def __str__(self):
