@@ -14,7 +14,7 @@ import os
 # import environ
 from pathlib import Path
 from datetime import timedelta
-
+from helper.credential import *
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -150,10 +150,10 @@ SIMPLE_JWT = {
 }
 
 ###################### EMAIL SETTINGS ###################
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'  # Replace 'smtp.example.com' with your SMTP server hostname
+EMAIL_BACKEND = EMAIL_BACKEND
+EMAIL_HOST = EMAIL_HOST  # Replace with your SMTP server hostname
 EMAIL_PORT = 587  # Replace '587' with your SMTP server port number
-EMAIL_HOST_USER = 'yt.team.information@gmail.com'  # Replace 'your_email@example.com' with your email address
-EMAIL_HOST_PASSWORD = 'wqqv jmrf pwvc tjqz'  # Sender(My) Email Password
+EMAIL_HOST_USER = EMAIL_HOST_USER # Replace with your email address
+EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD  # Sender(My) Email Password
 EMAIL_USE_TLS = True  # Set it to 'True' if your SMTP server uses TLS encryption
 
