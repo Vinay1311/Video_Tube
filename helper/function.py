@@ -53,3 +53,11 @@ def error_message_function(errors):
         error = [value[:] for value in values]
         err = ' '.join(map(str,error))
         return err
+    
+# ------------------- Generate the Unique Login link --------------------- #
+def generate_unique_login_link(username):
+     """
+     return a unique link for the login page after register
+     :returns: string
+     """
+     return f'http://YT_Project/user={username}/login_page'
