@@ -11,12 +11,17 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 import os
-# import environ
+import environ
 from pathlib import Path
 from datetime import timedelta
-from helper.credential import *
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = environ.Env(DEBUG=bool, ALLOWED_HOSTS=list, CSRF_TRUSTED_ORIGINS=list, ENABLE_SENTRY=bool)
+
+env_file = BASE_DIR /'.env'
+environ.Env.read_env(env_file=env_file, overwrite=True)
 
 
 # Quick-start development settings - unsuitable for production
@@ -26,10 +31,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-jfg1^gpn3i0%v8wft_1&^2%v^=fi%-u!sf=tt#84az-o&@h-pm"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
+DEBUG = env('DEBUG')
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -150,10 +153,10 @@ SIMPLE_JWT = {
 }
 
 ###################### EMAIL SETTINGS ###################
-EMAIL_BACKEND = EMAIL_BACKEND
-EMAIL_HOST = EMAIL_HOST  # Replace with your SMTP server hostname
+EMAIL_BACKEND = env('EMAIL_BACKEND')
+EMAIL_HOST = env('EMAIL_HOST')  # Replace with your SMTP server hostname
 EMAIL_PORT = 587  # Replace '587' with your SMTP server port number
-EMAIL_HOST_USER = EMAIL_HOST_USER # Replace with your email address
-EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD  # Sender(My) Email Password
+EMAIL_HOST_USER = env('EMAIL_HOST_USER') # Replace with your email address
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')  # Sender(My) Email Password
 EMAIL_USE_TLS = True  # Set it to 'True' if your SMTP server uses TLS encryption
 
