@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'helper',
     'master',
     'app_users',
+    'video',
 ]
 
 MIDDLEWARE = [
