@@ -115,7 +115,6 @@ class GetUserDetailApi(generics.RetrieveAPIView):
 
     def retrieve(self, request, *args, **kwargs):
         user_id = request.user.app_user.id
-        print(user_id)
 
         user_instance = UserDetails.objects.get(id=user_id)
         serializer = self.get_serializer(instance = user_instance)

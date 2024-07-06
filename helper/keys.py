@@ -5,3 +5,8 @@ AVATAR_IMAGE = "avatar_image"
 COVER_IMAGE = "cover_image"
 EMAIL = "email"
 PASSWORD = "password"
+
+########### Video app keys ############
+VIDEO_ID = "video_id"
+VIDEO_THUMBNAIL = "video_thumbnail"
+VIDEO_FILE = "video_file"

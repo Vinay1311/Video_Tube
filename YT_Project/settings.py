@@ -143,9 +143,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
-    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema', # For Swagger Open-API
-
 }
+################################### AUTH USER MODEL(Custom Add-On Setting) ##################################
+AUTH_USER_MODEL = "base_user.User" 
 
 #################### SIMPLE JWT #########################
 SIMPLE_JWT = {

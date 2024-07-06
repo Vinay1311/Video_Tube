@@ -11,10 +11,10 @@ from app_users.models import UserDetails
 class VideoDetails(CreationModeificationBase):
     """Model to store the video details"""
     users = models.ForeignKey(UserDetails, on_delete=models.CASCADE, related_name="user_video_details")
+    video_title = models.CharField(max_length=350, null=True, blank=True)
     video_file = models.FileField(null=True, blank=True, upload_to="media/files/video_file/videos/")
     video_thumbnail = models.ImageField(null=True, blank=True, upload_to="media/files/video_file/videos_thumbanail/")
     flag_video_thumbnail = models.BooleanField(default=False)
-    video_title = models.CharField(max_length=250, null=True, blank=True)
     video_description = models.TextField(null=True, blank=True)
     video_duration = models.CharField(max_length=20, null=True, blank=True)
     flag_is_published = models.BooleanField(default= False)
@@ -36,7 +36,7 @@ class Playlist(CreationModeificationBase):
         return self.playlist_name
     
 class Comment(CreationModeificationBase):
-    """Model to store the like details"""
+    """Model to store the Comments details"""
     user = models.OneToOneField(UserDetails, on_delete=models.CASCADE, related_name="commented_by_user")
     video = models.ForeignKey(VideoDetails, on_delete=models.CASCADE, related_name="comments_on_video")
     content = models.TextField(null=True, blank=True)
@@ -47,12 +47,12 @@ class Comment(CreationModeificationBase):
     
 
 class Like(CreationModeificationBase):
-    """Model to store the like details"""
+    """Model to store the Like details"""
     user = models.OneToOneField(UserDetails, on_delete=models.CASCADE, related_name="liked_by_user")
-    video = models.OneToOneField(VideoDetails, on_delete=models.CASCADE, related_name="like_video")
-    comment = models.OneToOneField(Comment, on_delete=models.CASCADE, related_name="like_comments")
-    # twitter = models.OneToOneField(Twitter, on_delete=models.CASCADE, related_name="like_twittwer_post")
+    video = models.OneToOneField(VideoDetails, on_delete=models.CASCADE, null=True, blank=True, related_name="like_video")
+    comment = models.OneToOneField(Comment, on_delete=models.CASCADE, null=True, blank=True, related_name="like_comments")
+    # twitter = models.OneToOneField(Twitter, on_delete=models.CASCADE, null=True, blank=True, related_name="like_twittwer_post")
     flag_like = models.BooleanField(default=False)
 
     def __str__(self) :
-        return f'{self.video}-{self.user}'
+        return f'{self.video.video_title}-{self.user}'
