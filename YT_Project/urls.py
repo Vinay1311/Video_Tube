@@ -24,6 +24,7 @@ urlpatterns = [
     path("master/", include('master.urls')),#URL Path for master app
     # path("base_user/", include('base_user.urls')),#URL Path for base_users app
     path("app_users/", include('app_users.urls')),#URL Path for app_users app
+    path("video/", include('video.urls')),#URL Path for video app
 ]
 
 # Media files settings
