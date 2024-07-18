@@ -6,6 +6,7 @@ EMAIL_NOT_CORRECT = "Email is incorrect"
 PHONE_NUMBER_INCORRECT = "Phone number is incorrect "
 
 ###################### App_Users app Messages ##################
+BAD_ITEM_REQUEST = "Bad {} request"
 THIS_FIELD_REQUIRED = "{} is Required"
 USER_DETAILS_SAVED = "User Details Saved"
 USER_DATA_FETCHED = "Data fetched Successfully"
@@ -21,3 +22,5 @@ VIDEO_ID_NOT_EXISTS = "Video_id not exists"
 VIDEO_DETAILS_SAVED = "Video details saved"
 VIDEO_FILE_IMAGE_REQUIRED = "Video File / thumbanail is required"
 VIDEO_DATA_FETCHED = "Data fetched successfully"
+COMMENT_POSTED = "Comment posted successfully"
+COMMENTS_FETCHED = "Comments fetched successfully"
