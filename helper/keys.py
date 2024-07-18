@@ -10,3 +10,5 @@ PASSWORD = "password"
 VIDEO_ID = "video_id"
 VIDEO_THUMBNAIL = "video_thumbnail"
 VIDEO_FILE = "video_file"
+FLAG_USER = 'flag_user'
+COMMENT_ID = "comment_id"
