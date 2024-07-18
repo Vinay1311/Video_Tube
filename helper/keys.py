@@ -12,3 +12,5 @@ VIDEO_THUMBNAIL = "video_thumbnail"
 VIDEO_FILE = "video_file"
 FLAG_USER = 'flag_user'
 COMMENT_ID = "comment_id"
+TWITTER_POST_ID = "twitter_post_id"
+LIKE_ID = "like_id"

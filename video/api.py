@@ -8,7 +8,8 @@ from django.contrib.auth import authenticate
 from helper import messages, keys
 from helper.status import *
 from helper.function import ResponseHandling, error_message_function
-from video.serializers import PostVideoSerializer, GetVideoDetailsSerializer, GetVideoNUserDetailsSerializer, PostCommentSerializer, GetVideoCommentsSerializer
+from video.serializers import PostVideoSerializer, GetVideoDetailsSerializer, GetVideoNUserDetailsSerializer, PostCommentSerializer, GetVideoCommentsSerializer,\
+                                LikeVideoCommentPostSerializer
 from video.models import VideoDetails, Playlist, Comment, Like
 
 
@@ -210,7 +211,65 @@ class GetVideoCommentsApi(generics.ListAPIView):
             return Response(ResponseHandling.failure_response_message(messages.BAD_ITEM_REQUEST.format(keys.VIDEO_ID), ''), status = status400)
         
         comments = Comment.objects.filter(video = video_id)
-        print(comments)
         serializer = self.get_serializer(comments, many = True, context={'request': request})
 
         return Response(ResponseHandling.success_response_message(messages.COMMENTS_FETCHED, serializer.data), status = status200)
+    
+#---------------- Comment Post Api ------------------- #
+class LikeVideoCommentTwitterPostApi(generics.GenericAPIView):
+    """ 
+    Api Like Youtube Video, Comment Or Twittwer Post By User
+    """
+
+    serializer_class = LikeVideoCommentPostSerializer
+    permission_classes = [IsAuthenticated]
+    authenticate_classes = [JWTAuthentication]
+
+    def post(self, request, *args, **kwargs):
+        data = request.data.copy()
+
+        video_id = data.pop(keys.VIDEO_ID, None)
+        comment_id = data.pop(keys.COMMENT_ID, None)
+        twitter_post_id = data.pop(keys.TWITTER_POST_ID, None)
+
+        if video_id and comment_id and twitter_post_id is None:
+             return Response(ResponseHandling.failure_response_message(messages.ID_REQUIRED, ''), status=status400)
+        
+        user = request.user.app_user.id
+        data['user'] = user
+
+        if video_id:
+            video_instance = VideoDetails.objects.get(id = video_id)
+            if video_instance is not None:
+                video_instance.likes_count += 1
+                video_instance.save()
+                data['video'] = video_instance.id
+
+                serializer = self.get_serializer(data = data)
+            else:
+                return Response(ResponseHandling.failure_response_message(messages.BAD_ITEM_REQUEST.format(keys.VIDEO_ID), ''), status=status400)
+            
+        if comment_id:
+            comment_instance = Comment.objects.get(id = comment_id)
+            if comment_instance is not None:
+                comment_instance.like_counts += 1
+                comment_instance.save()
+                data['comment'] = comment_instance.id
+
+                serializer = self.get_serializer(data = data)
+            else:
+                return Response(ResponseHandling.failure_response_message(messages.BAD_ITEM_REQUEST.format(keys.COMMENT_ID), ''), status=status400)
+        # elif comment_id:
+        #     serializer = self.get_serializer(user = user, comment = comment_id)
+
+        # else:
+        #     serializer = self.get_serializer(user = user, twitter_post = twitter_post_id)
+
+        if not serializer.is_valid():
+            errors = serializer.errors
+            err = error_message_function(errors)
+            return Response(ResponseHandling.failure_response_message(errors, ''), status= status400)
+
+        like_instance = serializer.save()
+        return Response(ResponseHandling.success_response_message(messages.OPERATION_SUCCESS, {keys.LIKE_ID: like_instance.id}), status = status200)
+        

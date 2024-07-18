@@ -3,7 +3,7 @@ from rest_framework import serializers
 
 #--------------- Internal Imports ----------------- #
 from helper import keys, messages
-from video.models import VideoDetails, Comment
+from video.models import VideoDetails, Comment, Like
 from app_users.models import UserDetails
 
 
@@ -132,3 +132,12 @@ class GetUserDetailsSerializer(serializers.ModelSerializer):
                 cover_image_url = request.build_absolute_uri(instance.cover_image.url)
                 return cover_image_url
         return ''
+    
+    
+# -------------------- Get User Details Serializer -------------------- #
+class LikeVideoCommentPostSerializer(serializers.ModelSerializer):
+    """ Serializer to Like video, comment & twitter post """
+
+    class Meta:
+        model = Like
+        fields = ['user','video','comment']
