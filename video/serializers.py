@@ -89,7 +89,7 @@ class GetVideoCommentsSerializer(serializers.ModelSerializer):
     # flag_edited =  serializers.SerializerMethodField()
     class Meta:
         model = Comment
-        fields = ['comment_id','user_details','content','flag_edited']
+        fields = ['comment_id','user_details','content','flag_edited','like_counts']
 
     def get_comment_id(self, instance):
         return instance.id

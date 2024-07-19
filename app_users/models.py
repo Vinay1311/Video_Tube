@@ -19,7 +19,7 @@ class UserDetails(CreationModeificationBase):
     avatar_image = models.ImageField(null=True, blank= True, upload_to='media/files/user_avatar_images/')
     cover_image = models.ImageField(null=True, blank= True, upload_to='media/files/user_cover_images/')
     password = models.CharField(max_length=200)
-    # videos_history = models.ForeignKey()
+    videos_history = models.ForeignKey('video.VideoDetails', on_delete=models.CASCADE, null=True, blank=True, related_name='user_video_history')
 
     def __str__(self):
         return str(self.fullname)
