@@ -11,7 +11,7 @@ from helper.function import ResponseHandling, error_message_function, get_tokens
 from helper.status import *
 from app_users.models import UserDetails
 from base_user.models import User
-from app_users.serializers import PostUserDetailsSerializer, GetUserDetailsSerializer, UserLoginSerializer
+from app_users.serializers import PostUserDetailsSerializer, GetUserDetailsSerializer, UserLoginSerializer, GetUserWatchedVideoHistorySerializer
 
 # ---------------- Post User Register Api ---------------#
 class PostUserRegisterApi(generics.CreateAPIView):
@@ -138,3 +138,19 @@ class CheckUserName(generics.GenericAPIView):
             return Response(ResponseHandling.success_response_message(messages.OPERATION_SUCCESS, {keys.IS_USERNAME_AVAILABLE: False}), status=status200)
         else:
             return Response(ResponseHandling.success_response_message(messages.OPERATION_SUCCESS, {keys.IS_USERNAME_AVAILABLE: True}), status=status200)
+
+# ---------------- Get User Watched-Video-History Api ---------------- #
+class GetUserWatchedVideoHistoryApi(generics.RetrieveAPIView):
+    """
+    This is the Get api to get user details
+    """
+    serializer_class = GetUserWatchedVideoHistorySerializer
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+
+    def retrieve(self, request, *args, **kwargs):
+        user_id = request.user.app_user.id
+
+        user_instance = UserDetails.objects.get(id=user_id)
+        serializer = self.get_serializer(instance = user_instance)
+        return Response(ResponseHandling.success_response_message(messages.USER_DATA_FETCHED, serializer.data), status=status200)
