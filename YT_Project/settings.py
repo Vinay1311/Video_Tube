@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'master',
     'app_users',
     'video',
+    'twitter',
 ]
 
 MIDDLEWARE = [

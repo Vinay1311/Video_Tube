@@ -5,7 +5,7 @@ from video.models import *
 class VideoDetailsAdmin(admin.ModelAdmin):
     list_display = ['id','users','video_title','likes_count','comments_count']
     search_fields = ['users','video_title']
-    search_fields = ['flag_is_published']
+    list_filter = ['flag_is_published']
     readonly_fields = ['created', 'modified']
 
 @admin.register(Playlist)
@@ -18,12 +18,12 @@ class PlaylistAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     list_display = ['id','video','user','content','flag_edited']
     search_fields = ['user','video']
-    search_fields = ['flag_edited']
+    list_filter = ['flag_edited']
     readonly_fields = ['created', 'modified']
 
 @admin.register(Like)
 class LikeAdmin(admin.ModelAdmin):
     list_display = ['id','user','video','comment']
     search_fields = ['user','video','comment']
-    search_fields = ['flag_like']
+    list_filter = ['flag_like']
     readonly_fields = ['created', 'modified']
