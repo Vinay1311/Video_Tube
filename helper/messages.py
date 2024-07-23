@@ -17,7 +17,7 @@ LOGIN_SUCCESSFULLY = "Login successfully"
 INVALID_EMAIL = "Invalid Email"
 INCORRECT_PASSWORD = "Password is incorrect"
 
-###################### App_Users app Messages ##################
+###################### Video app Messages ##################
 VIDEO_ID_NOT_EXISTS = "Video_id not exists"
 VIDEO_DETAILS_SAVED = "Video details saved"
 VIDEO_FILE_IMAGE_REQUIRED = "Video File / thumbanail is required"
@@ -25,3 +25,8 @@ VIDEO_DATA_FETCHED = "Data fetched successfully"
 COMMENT_POSTED = "Comment posted successfully"
 COMMENTS_FETCHED = "Comments fetched successfully"
 ID_REQUIRED = "Id is required"
+
+
+###################### Twitter App Messages ######################
+POSTED_SUCCESSFULLY = 'Posted successfully'
+DATA_FETCHED_SUCCESSFULLY = "Data fetched successfully"
