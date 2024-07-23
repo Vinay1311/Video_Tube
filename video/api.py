@@ -141,11 +141,11 @@ class GetVideoDetailsListApi(generics.ListAPIView):
         if flag_user:
             #Retrieve User Video List
             user = request.user.app_user.id
-            queryset = VideoDetails.objects.filter(users = user)
+            queryset = VideoDetails.objects.filter(users = user).order_by('-created_by').order_by('-id')
 
         else:
             #Retrieve all Video List
-            queryset = VideoDetails.objects.all()
+            queryset = VideoDetails.objects.all().order_by('-created_by').order_by('-id')
 
         serialzer = self.get_serializer(queryset, many =True)
         serialzer = GetVideoNUserDetailsSerializer(queryset, many =True)
@@ -210,7 +210,7 @@ class GetVideoCommentsApi(generics.ListAPIView):
         if video_id is None and video_id == '':
             return Response(ResponseHandling.failure_response_message(messages.BAD_ITEM_REQUEST.format(keys.VIDEO_ID), ''), status = status400)
         
-        comments = Comment.objects.filter(video = video_id)
+        comments = Comment.objects.filter(video = video_id).order_by('-created_by').order_by('-id')
         serializer = self.get_serializer(comments, many = True, context={'request': request})
 
         return Response(ResponseHandling.success_response_message(messages.COMMENTS_FETCHED, serializer.data), status = status200)
