@@ -10,6 +10,8 @@ class TwitterPost(CreationModeificationBase):
     content = models.TextField()
     media_file = models.FileField(null=True, blank=True, upload_to='media/files/twitter_files/')
     flag_media_file = models.BooleanField(default=False)
+    like_counts = models.IntegerField(default = 0)
+    comments_count = models.IntegerField(default=0)
 
     def __str__(self):
         return f'{self.id} - {self.user.fullname}'
