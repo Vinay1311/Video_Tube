@@ -7,6 +7,7 @@ from django.core.validators import RegexValidator
 # ---------------- Internal Imports -----------------#
 from helper.models import CreationModeificationBase
 from app_users.models import UserDetails
+from twitter.models import TwitterPost
 
 class VideoDetails(CreationModeificationBase):
     """Model to store the video details"""
@@ -38,7 +39,8 @@ class Playlist(CreationModeificationBase):
 class Comment(CreationModeificationBase):
     """Model to store the Comments details"""
     user = models.ForeignKey(UserDetails, on_delete=models.CASCADE, related_name="commented_by_user")
-    video = models.ForeignKey(VideoDetails, on_delete=models.CASCADE, related_name="comments_on_video")
+    video = models.ForeignKey(VideoDetails, on_delete=models.CASCADE, null=True, blank =True, related_name="comments_on_video")
+    tweet = models.ForeignKey(TwitterPost, on_delete=models.CASCADE, null=True, blank =True, related_name="comments_on_tweets")
     content = models.TextField(null=True, blank=True)
     flag_edited = models.BooleanField(default=False)
     like_counts = models.IntegerField(default=0)
@@ -52,7 +54,7 @@ class Like(CreationModeificationBase):
     user = models.ForeignKey(UserDetails, on_delete=models.CASCADE, related_name="liked_by_user")
     video = models.OneToOneField(VideoDetails, on_delete=models.CASCADE, null=True, blank=True, related_name="like_video")
     comment = models.OneToOneField(Comment, on_delete=models.CASCADE, null=True, blank=True, related_name="like_comments")
-    # twitter = models.OneToOneField(Twitter, on_delete=models.CASCADE, null=True, blank=True, related_name="like_twittwer_post")
+    twitter = models.OneToOneField(TwitterPost, on_delete=models.CASCADE, null=True, blank=True, related_name="like_twittwer_post")
     flag_like = models.BooleanField(default=False)
 
     def __str__(self) :
